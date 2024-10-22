@@ -1,0 +1,136 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #14142B;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+
+.title {
+  font-weight: bold;
+  color: #fdf4b7;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.tic-tac-toe {
+  color: #fff;
+  height: 100vh;
+}
+
+.tic-tac-toe .board {
+  margin: 0 auto;
+}
+
+.tic-tac-toe .boxes {
+  height: 180px;
+  width: 180px;
+  background-color: #832BC1;
+  border: 4px solid #14142B;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 77px;
+}
+
+.neon-blue {
+  color: rgb(180, 227, 246);
+  filter: drop-shadow(0 0 2px #FFF) drop-shadow(0 0 4px #66A0FF) drop-shadow(0 0 6px #66A0FF);
+}
+
+.neon-red {
+  color: rgb(255, 87, 123);
+  filter: drop-shadow(0 0 2px #FFF) drop-shadow(0 0 4px #FF2D95) drop-shadow(0 0 6px #FF2D95);
+}
+
+/* Neumorphic button */
+.circle_black {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(176, 176, 176);
+  cursor: pointer;
+  transition: 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  font-size: 18px;
+}
+
+.circle_black:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  content: " ";
+  filter: blur(3px);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3), -4px -4px 10px rgba(255, 255, 255, 0.1);
+  transition: 0.3s ease-in;
+}
+
+.circle_black:hover:before {
+  box-shadow:
+    4px 4px 10px rgba(0, 0, 0, 0.3),
+    -4px -4px 10px rgba(255, 255, 255, 0.1),
+    inset 4px 4px 10px rgba(0, 0, 0, 1),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.circle_black:active:before {
+  transform: scale(0.95);
+  /* Scale down on press */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5), -2px -2px 5px rgba(255, 255, 255, 0.3);
+}
+
+.circle_black:hover:before {
+  transform: scale(1.05);
+}
+
+.circle_black p {
+  position: relative;
+  z-index: 5;
+  user-select: none;
+  cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 762px) {
+  .title {
+    font-size: 36px;
+  }
+
+  .tic-tac-toe .boxes {
+    height: 120px;
+    width: 120px;
+    font-size: 44px;
+  }
+}
