@@ -41,7 +41,8 @@ export const TicTacToe = () => {
       newData[firstMove] = "";
     }
 
-    newData[num] = count % 2 === 0 ? "x" : "o";
+    // newData[num] = count % 2 === 0 ? "x" : "o";
+    newData[num] = "x";
     setData(newData);
     setHistory(newHistory);
     setCount(count + 1);
@@ -49,7 +50,64 @@ export const TicTacToe = () => {
     const winner = checkWinner(newData);
     if (winner) {
       won(winner);
+    } else {
+      setTimeout(() => {
+        computerMove(newData, newHistory);
+      }, 500);
     }
+  };
+
+  const computerMove = (current, history) => {
+    const emptyCells = current
+      .map((cell, index) => (cell === "" ? index : null))
+      .filter((cell) => cell !== null);
+
+    if (emptyCells.length === 0) return;
+
+    const bestMove = minimax(current, "o").index;
+    const newData = [...current];
+    const newHistory = [...history, bestMove];
+
+    if (newHistory.length > 5) {
+      const firstMove = newHistory.shift();
+      newData[firstMove] = "";
+    }
+
+    newData[bestMove] = "o";
+    setData(newData);
+    setHistory(newHistory);
+
+    const winner = checkWinner(newData);
+    if (winner) {
+      won(winner);
+    } else {
+      setCount(count + 1);
+    }
+  };
+
+  const minimax = (board, player) => {
+    const winner = checkWinner(board);
+    if (winner === "o") return { score: 1 };
+    if (winner === "x") return { score: -1 };
+    if (board.every((cell) => cell !== "")) return { score: 0 };
+
+    const moves = [];
+
+    board.forEach((cell, index) => {
+      if (cell === "") {
+        const newBoard = [...board];
+        newBoard[index] = player;
+        const result = minimax(newBoard, player === "o" ? "x" : "o");
+        moves.push({ index, score: result.score });
+      }
+    });
+    return player === "o"
+      ? moves.reduce((best, move) => (move.score > best.score ? move : best), {
+          score: -Infinity,
+        })
+      : moves.reduce((best, move) => (move.score < best.score ? move : best), {
+          score: Infinity,
+        });
   };
 
   const won = (winner) => {
