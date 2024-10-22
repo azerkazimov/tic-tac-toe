@@ -131,6 +131,14 @@ body {
   .tic-tac-toe .boxes {
     height: 120px;
     width: 120px;
-    font-size: 44px;
+    font-size: 48px;
+  }
+
+  .neon-blue {
+    filter: drop-shadow(0 0 1px #FFF) drop-shadow(0 0 2px #66A0FF) drop-shadow(0 0 3px #66A0FF);
+  }
+
+  .neon-red {
+    filter: drop-shadow(0 0 1px #FFF) drop-shadow(0 0 2px #FF2D95) drop-shadow(0 0 3px #FF2D95);
   }
 }
