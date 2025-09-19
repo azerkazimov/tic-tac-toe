@@ -1,6 +1,7 @@
 import { FaRegCircle } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 export const TicTacToe = () => {
   const [count, setCount] = useState(0);
@@ -143,8 +144,54 @@ export const TicTacToe = () => {
   };
 
   return (
-    <div className="tic-tac-toe container w-full flex flex-col items-center justify-center gap-5 p-4">
-      <h1 className="title text-6xl">{title}</h1>
+    <>
+      <Helmet>
+        {/* Basic Meta Tags */}
+        <title>Tic Tac Toe - Play Against AI | React Game</title>
+        <meta name="description" content="Play the classic Tic Tac Toe game with an intelligent AI opponent. Built with React and featuring modern UI design. Challenge yourself against our smart AI algorithm!" />
+        <meta name="keywords" content="tic tac toe, game, AI, react, javascript, puzzle, strategy, online game, free game" />
+        <meta name="author" content="Tic Tac Toe Game" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={window.location.href} />
+
+        {/* Open Graph Meta Tags (Facebook, LinkedIn, etc.) */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Tic Tac Toe - Play Against AI | React Game" />
+        <meta property="og:description" content="Play the classic Tic Tac Toe game with an intelligent AI opponent. Built with React and featuring modern UI design. Challenge yourself against our smart AI algorithm!" />
+        <meta property="og:image" content={`${window.location.origin}/tic-tac-toe-social.svg`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Tic Tac Toe Game Board with X and O marks" />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:site_name" content="Tic Tac Toe Game" />
+        <meta property="og:locale" content="en_US" />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Tic Tac Toe - Play Against AI | React Game" />
+        <meta name="twitter:description" content="Play the classic Tic Tac Toe game with an intelligent AI opponent. Built with React and featuring modern UI design!" />
+        <meta name="twitter:image" content={`${window.location.origin}/tic-tac-toe-social.svg`} />
+        <meta name="twitter:image:alt" content="Tic Tac Toe Game Board with X and O marks" />
+
+        {/* App Icons */}
+        <link rel="icon" type="image/svg+xml" href="/tic-tac-toe-icon.svg" />
+        <link rel="apple-touch-icon" href="/tic-tac-toe-icon.svg" />
+        <link rel="shortcut icon" href="/tic-tac-toe-icon.svg" />
+
+        {/* Mobile App Meta Tags */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Tic Tac Toe" />
+        <meta name="application-name" content="Tic Tac Toe" />
+        <meta name="theme-color" content="#1a1a1a" />
+
+        {/* Additional SEO Meta Tags */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+      </Helmet>
+      <div className="tic-tac-toe container w-full flex flex-col items-center justify-center gap-5 p-4">
+        <h1 className="title text-6xl">{title}</h1>
       <div className="board flex">
         <div className="row">
           <div className="boxes" onClick={() => toggle(0)}>
@@ -196,5 +243,6 @@ export const TicTacToe = () => {
         <p>Reset</p>
       </button>
     </div>
+    </>
   );
 };
