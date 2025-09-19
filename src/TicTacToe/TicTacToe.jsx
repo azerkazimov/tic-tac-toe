@@ -8,6 +8,7 @@ export const TicTacToe = () => {
   const [data, setData] = useState(Array(9).fill(""));
   const [history, setHistory] = useState([]);
   const [title, setTitle] = useState("Tic Tac Toe");
+  const [isComputerTurn, setIsComputerTurn] = useState(false);
 
   const checkWinner = (board) => {
     const lines = [
@@ -30,7 +31,7 @@ export const TicTacToe = () => {
   };
 
   const toggle = (num) => {
-    if (lock || data[num] !== "") {
+    if (lock || data[num] !== "" || isComputerTurn) {
       return;
     }
     const newData = [...data];
@@ -41,8 +42,8 @@ export const TicTacToe = () => {
       newData[firstMove] = "";
     }
 
-    // newData[num] = count % 2 === 0 ? "x" : "o";
-    newData[num] = "x";
+    // Player is always 'x' (count % 2 === 0), computer is always 'o'
+    newData[num] = count % 2 === 0 ? "x" : "o";
     setData(newData);
     setHistory(newHistory);
     setCount(count + 1);
@@ -50,7 +51,9 @@ export const TicTacToe = () => {
     const winner = checkWinner(newData);
     if (winner) {
       won(winner);
-    } else {
+    } else if (count % 2 === 0) {
+      // If it was player's turn (x), now it's computer's turn
+      setIsComputerTurn(true);
       setTimeout(() => {
         computerMove(newData, newHistory);
       }, 500);
@@ -62,7 +65,10 @@ export const TicTacToe = () => {
       .map((cell, index) => (cell === "" ? index : null))
       .filter((cell) => cell !== null);
 
-    if (emptyCells.length === 0) return;
+    if (emptyCells.length === 0) {
+      setIsComputerTurn(false);
+      return;
+    }
 
     const bestMove = minimax(current, "o").index;
     const newData = [...current];
@@ -76,12 +82,12 @@ export const TicTacToe = () => {
     newData[bestMove] = "o";
     setData(newData);
     setHistory(newHistory);
+    setCount(prevCount => prevCount + 1);
+    setIsComputerTurn(false);
 
     const winner = checkWinner(newData);
     if (winner) {
       won(winner);
-    } else {
-      setCount(count + 1);
     }
   };
 
@@ -133,6 +139,7 @@ export const TicTacToe = () => {
     setLock(false);
     setHistory([]);
     setTitle("Tic Tac Toe");
+    setIsComputerTurn(false);
   };
 
   return (
